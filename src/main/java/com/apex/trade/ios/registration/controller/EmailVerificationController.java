@@ -1,5 +1,8 @@
-package com.apex.trade.ios.registration;
+package com.apex.trade.ios.registration.controller;
 
+import com.apex.trade.ios.registration.entities.Investor;
+import com.apex.trade.ios.registration.repo.InvestorRegistrationRepository;
+import com.apex.trade.ios.registration.utils.KycStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
