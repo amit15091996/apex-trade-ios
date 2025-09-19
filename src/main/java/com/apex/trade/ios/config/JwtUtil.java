@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 @Slf4j
 public class JwtUtil {
-    private final String jwtSecret = "YourSecretKey";
+    private final String jwtSecret = "uW8vJt6mRzQf4B1KxP9YdM2HsVcXtZeFqLnOwEjRgUkTiYpX";
     private final int jwtExpirationMs = 86400000;
 
     public String generateToken(UserDetails userDetails) {

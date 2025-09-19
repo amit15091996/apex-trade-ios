@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -16,7 +17,7 @@ public class VerificationScheduler {
 
     private final InvestorRegistrationRepository investorRepository;
     private final NotificationService notificationService;
-    private final Random random = new Random();
+    private final SecureRandom secureRandom = new SecureRandom();
 
     @Scheduled(fixedDelay = 60000) // every 60s
     public void processPendingKycs() {
@@ -24,7 +25,7 @@ public class VerificationScheduler {
         log.info("Processing {} pending KYC(s)", pending.size());
 
         for (Investor investor : pending) {
-            KycStatus newStatus = random.nextBoolean() ? KycStatus.VERIFIED : KycStatus.REJECTED;
+            KycStatus newStatus = secureRandom.nextBoolean() ? KycStatus.VERIFIED : KycStatus.REJECTED;
             investor.setKycStatus(newStatus);
             investorRepository.save(investor);
 

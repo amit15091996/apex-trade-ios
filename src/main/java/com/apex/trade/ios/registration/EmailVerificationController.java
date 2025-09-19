@@ -50,7 +50,6 @@ public class EmailVerificationController {
         File dest = new File(path);
         file.transferTo(dest);
 
-        // Optionally save filename/path in investor
         investor.setKycStatus(KycStatus.PENDING);
         investorRepository.save(investor);
 
