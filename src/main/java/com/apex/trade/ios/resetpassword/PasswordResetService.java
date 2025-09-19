@@ -1,8 +1,10 @@
 package com.apex.trade.ios.resetpassword;
 
+
+
 import com.apex.trade.ios.email.EmailService;
-import com.apex.trade.ios.registration.Investor;
-import com.apex.trade.ios.registration.InvestorRegistrationRepository;
+import com.apex.trade.ios.registration.entities.Investor;
+import com.apex.trade.ios.registration.repo.InvestorRegistrationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
