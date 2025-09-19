@@ -29,4 +29,18 @@ public class EmailService {
         message.setText("Your OTP for login is: " + otp + ". It expires in 5 minutes.");
         mailSender.send(message);
     }
+
+    public void sendPasswordResetEmail(String email, String token) {
+        String resetLink = "https://yourfrontend.com/reset-password?token=" + token;
+
+        String subject = "Password Reset Request";
+        String body = "To reset your password, click the link below:\n" + resetLink +
+                "\nThis link will expire in 30 minutes.";
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
+    }
 }
