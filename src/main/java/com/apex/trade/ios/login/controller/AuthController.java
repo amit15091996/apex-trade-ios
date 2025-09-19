@@ -1,7 +1,11 @@
-package com.apex.trade.ios.login;
+package com.apex.trade.ios.login.controller;
 
 import com.apex.trade.ios.config.JwtUtil;
 import com.apex.trade.ios.email.EmailService;
+import com.apex.trade.ios.login.beans.LoginRequest;
+import com.apex.trade.ios.login.beans.OtpRequest;
+import com.apex.trade.ios.login.entity.UserOtp;
+import com.apex.trade.ios.login.repo.UserOtpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,11 +49,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequest.getEmail(), loginRequest.getPassword()
-                    )
-            );
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
             // Generate 6-digit OTP
             String otp = String.format("%06d", new SecureRandom().nextInt(999999));
@@ -57,8 +57,7 @@ public class AuthController {
             LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(OTP_EXPIRATION_MINUTES);
 
 
-            userOtpRepository.findByEmail(loginRequest.getEmail())
-                    .ifPresent(existingOtp -> userOtpRepository.delete(existingOtp));
+            userOtpRepository.findByEmail(loginRequest.getEmail()).ifPresent(existingOtp -> userOtpRepository.delete(existingOtp));
 
             UserOtp userOtp = new UserOtp();
             userOtp.setEmail(loginRequest.getEmail());
@@ -68,14 +67,10 @@ public class AuthController {
 
             emailService.sendOtpEmail(loginRequest.getEmail(), otp);
 
-            return ResponseEntity.ok(Map.of(
-                    "status", "otp_sent",
-                    "message", "OTP has been sent to your email"
-            ));
+            return ResponseEntity.ok(Map.of("status", "otp_sent", "message", "OTP has been sent to your email"));
 
         } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("status", "failed", "message", "Invalid credentials"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status", "failed", "message", "Invalid credentials"));
         }
     }
 
@@ -84,21 +79,18 @@ public class AuthController {
         Optional<UserOtp> optionalUserOtp = userOtpRepository.findByEmail(otpRequest.getEmail());
 
         if (optionalUserOtp.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("status", "failed", "message", "OTP not found, please login again"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status", "failed", "message", "OTP not found, please login again"));
         }
 
         UserOtp userOtp = optionalUserOtp.get();
 
         if (userOtp.getExpiryTime().isBefore(LocalDateTime.now())) {
             userOtpRepository.delete(userOtp);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("status", "failed", "message", "OTP expired, please login again"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status", "failed", "message", "OTP expired, please login again"));
         }
 
         if (!userOtp.getOtp().equals(otpRequest.getOtp())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("status", "failed", "message", "Invalid OTP"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status", "failed", "message", "Invalid OTP"));
         }
 
         userOtpRepository.delete(userOtp);
@@ -106,10 +98,6 @@ public class AuthController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(otpRequest.getEmail());
         String jwtToken = jwtUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(Map.of(
-                "status", "success",
-                "token", jwtToken,
-                "email", otpRequest.getEmail()
-        ));
+        return ResponseEntity.ok(Map.of("status", "success", "token", jwtToken, "email", otpRequest.getEmail()));
     }
 }

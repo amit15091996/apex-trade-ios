@@ -1,5 +1,6 @@
-package com.apex.trade.ios.registration;
+package com.apex.trade.ios.registration.entities;
 
+import com.apex.trade.ios.registration.utils.KycStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,28 +1,22 @@
-package com.apex.trade.ios.login;
+package com.apex.trade.ios.registration.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
-@Table(name = "user_otp")
+@Table(name = "roles")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserOtp {
+@AllArgsConstructor
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
-
-    private String otp;
-
-    private LocalDateTime expiryTime;
-
+    @Column(nullable = false, unique = true)
+    private String name; // e.g. "ROLE_INVESTOR", "ROLE_ADMIN"
 }
 

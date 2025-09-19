@@ -1,4 +1,4 @@
-package com.apex.trade.ios.login;
+package com.apex.trade.ios.login.beans;
 
 import lombok.Data;
 
