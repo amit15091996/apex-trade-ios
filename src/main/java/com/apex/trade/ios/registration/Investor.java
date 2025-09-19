@@ -43,6 +43,8 @@ public class Investor {
     private String emailVerificationToken;
 
 
+
+
     @PrePersist
     public void prePersist() {
         if (kycStatus == null) {

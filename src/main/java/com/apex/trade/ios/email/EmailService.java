@@ -21,4 +21,12 @@ public class EmailService {
 
         mailSender.send(message);
     }
+
+    public void sendOtpEmail(String toEmail, String otp) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject("Your OTP Code");
+        message.setText("Your OTP for login is: " + otp + ". It expires in 5 minutes.");
+        mailSender.send(message);
+    }
 }
