@@ -1,6 +1,6 @@
 package com.apex.trade.ios.email;
 
-import com.apex.trade.ios.registration.KycStatus;
+import com.apex.trade.ios.registration.utils.KycStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

@@ -1,4 +1,4 @@
-package com.apex.trade.ios.registration;
+package com.apex.trade.ios.registration.beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

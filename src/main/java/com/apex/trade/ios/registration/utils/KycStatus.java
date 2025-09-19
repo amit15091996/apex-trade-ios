@@ -1,4 +1,4 @@
-package com.apex.trade.ios.registration;
+package com.apex.trade.ios.registration.utils;
 
 public enum KycStatus {
     PENDING,
