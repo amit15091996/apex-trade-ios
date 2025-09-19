@@ -1,6 +1,8 @@
-package com.apex.trade.ios.registration;
+package com.apex.trade.ios.registration.utils;
 
 import com.apex.trade.ios.email.NotificationService;
+import com.apex.trade.ios.registration.entities.Investor;
+import com.apex.trade.ios.registration.repo.InvestorRegistrationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -8,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
 
 @Slf4j
 @Component

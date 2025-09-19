@@ -1,6 +1,12 @@
-package com.apex.trade.ios.registration;
+package com.apex.trade.ios.registration.service;
 
 import com.apex.trade.ios.email.EmailService;
+import com.apex.trade.ios.registration.beans.InvestorRegistrationRequest;
+import com.apex.trade.ios.registration.entities.Investor;
+import com.apex.trade.ios.registration.entities.Role;
+import com.apex.trade.ios.registration.repo.InvestorRegistrationRepository;
+import com.apex.trade.ios.registration.repo.RoleRepository;
+import com.apex.trade.ios.registration.utils.KycStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,8 +38,7 @@ public class InvestorRegistrationServiceImpl implements InvestorRegistrationServ
         String token = UUID.randomUUID().toString();
         investor.setEmailVerificationToken(token);
         investor.setEmailVerified(false);
-        Role role = roleRepository.findByName("ROLE_INVESTOR")
-                .orElseThrow(() -> new RuntimeException("Default role not found"));
+        Role role = roleRepository.findByName("ROLE_INVESTOR").orElseThrow(() -> new RuntimeException("Default role not found"));
 
         investor.setRoles(Set.of(role));
 

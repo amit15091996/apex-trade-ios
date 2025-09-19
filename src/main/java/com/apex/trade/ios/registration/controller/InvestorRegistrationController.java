@@ -1,5 +1,8 @@
-package com.apex.trade.ios.registration;
+package com.apex.trade.ios.registration.controller;
 
+import com.apex.trade.ios.registration.beans.InvestorRegistrationRequest;
+import com.apex.trade.ios.registration.entities.Investor;
+import com.apex.trade.ios.registration.service.InvestorRegistrationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
