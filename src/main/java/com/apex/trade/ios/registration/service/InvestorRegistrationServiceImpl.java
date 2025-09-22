@@ -23,6 +23,7 @@ public class InvestorRegistrationServiceImpl implements InvestorRegistrationServ
     private final RoleRepository roleRepository;
     private final EmailService emailService;
 
+
     @Override
     public Investor registerInvestor(InvestorRegistrationRequest request) {
         if (investorRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -48,4 +49,5 @@ public class InvestorRegistrationServiceImpl implements InvestorRegistrationServ
 
         return savedInvestor;
     }
+
 }

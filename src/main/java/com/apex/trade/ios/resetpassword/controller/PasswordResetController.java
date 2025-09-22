@@ -1,5 +1,6 @@
-package com.apex.trade.ios.resetpassword;
+package com.apex.trade.ios.resetpassword.controller;
 
+import com.apex.trade.ios.resetpassword.service.PasswordResetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
