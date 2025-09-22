@@ -1,4 +1,4 @@
-package com.apex.trade.ios.resetpassword;
+package com.apex.trade.ios.resetpassword.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
