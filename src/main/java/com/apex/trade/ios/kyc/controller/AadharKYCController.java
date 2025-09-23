@@ -1,4 +1,4 @@
-package com.apex.trade.ios.kyc;
+package com.apex.trade.ios.kyc.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/aadhaar")
@@ -20,9 +19,8 @@ public class AadharKYCController {
     public AadharKYCController(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder.build();
     }
-
-    //    {
-//        "aadhaar": "123412341234"
+//    {
+//        "aadhaar":"35733838";
 //    }
     @PostMapping("/request-otp")
     public Mono<ResponseEntity<String>> requestOtp(@RequestBody Map<String, String> req) {
@@ -32,7 +30,7 @@ public class AadharKYCController {
                 "channel", "SMS"
         );
         return webClient.post()
-                .uri("https://sandbox-aadhaar-provider.example.com/otp/request")
+                .uri("http://localhost:8080/sandbox-aadhaar-provider/otp/request")
                 .bodyValue(payload)
                 .retrieve()
                 .toEntity(String.class);
@@ -53,7 +51,7 @@ public class AadharKYCController {
         String otp = req.get("otp");
         Map<String, Object> payload = Map.of("txnId", txnId, "otp", otp);
         return webClient.post()
-                .uri("https://sandbox-aadhaar-provider.example.com/otp/verify")
+                .uri("http://localhost:8080/sandbox-aadhaar-provider/otp/verify")
                 .bodyValue(payload)
                 .retrieve()
                 .toEntity(String.class);
