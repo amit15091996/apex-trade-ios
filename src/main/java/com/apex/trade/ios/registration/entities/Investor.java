@@ -43,7 +43,7 @@ public class Investor {
 
     private String emailVerificationToken;
 
-
+    private String panNumber;
 
 
     @PrePersist
