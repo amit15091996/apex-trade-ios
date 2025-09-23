@@ -13,5 +13,4 @@ public class InvestorOnboardingSecurityApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InvestorOnboardingSecurityApplication.class, args);
 	}
-
 }

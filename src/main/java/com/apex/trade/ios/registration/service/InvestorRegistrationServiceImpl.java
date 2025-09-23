@@ -39,7 +39,7 @@ public class InvestorRegistrationServiceImpl implements InvestorRegistrationServ
         String token = UUID.randomUUID().toString();
         investor.setEmailVerificationToken(token);
         investor.setEmailVerified(false);
-        Role role = roleRepository.findByName("ROLE_INVESTOR").orElseThrow(() -> new RuntimeException("Default role not found"));
+        Role role = roleRepository.findByName("NEW_INVESTOR").orElseThrow(() -> new RuntimeException("Default role not found"));
 
         investor.setRoles(Set.of(role));
 
