@@ -46,6 +46,21 @@ public class Investor {
     private String panNumber;
 
 
+    @Column(length = 255)
+    private String address;
+
+    @Column(length = 100)
+    private String nominee;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 1)
+    private InvestorType type;
+
+    @Enumerated(EnumType.STRING)
+    private InvestorRole role;
+
+
+
     @PrePersist
     public void prePersist() {
         if (kycStatus == null) {
