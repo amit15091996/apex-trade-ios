@@ -30,9 +30,10 @@ public class SecurityConfig {
                                 "/api/investors/register",
                                 "/api/auth/login",
                                 "/api/investors/verify-email",
-                                "/api/auth/verify-otp"
+                                "/api/auth/verify-otp",
+                                "/api/investors/verify"
                         ).permitAll()
-                        .requestMatchers("/api/kyc/upload").hasRole("INVESTOR")
+//                        .requestMatchers("/api/kyc/upload").hasRole("INVESTOR")
                         .anyRequest().authenticated()
                 )
 

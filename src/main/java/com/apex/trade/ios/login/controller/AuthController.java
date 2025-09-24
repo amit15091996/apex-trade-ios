@@ -6,6 +6,8 @@ import com.apex.trade.ios.login.beans.LoginRequest;
 import com.apex.trade.ios.login.beans.OtpRequest;
 import com.apex.trade.ios.login.entity.UserOtp;
 import com.apex.trade.ios.login.repo.UserOtpRepository;
+import com.apex.trade.ios.registration.entities.Investor;
+import com.apex.trade.ios.registration.repo.InvestorRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +45,9 @@ public class AuthController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private InvestorRegistrationRepository investorRegistrationRepository;
 
     private static final int OTP_EXPIRATION_MINUTES = 5;
 
@@ -96,7 +101,9 @@ public class AuthController {
         userOtpRepository.delete(userOtp);
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(otpRequest.getEmail());
-        String jwtToken = jwtUtil.generateToken(userDetails);
+        Optional<Investor> investor = investorRegistrationRepository.findByEmail(otpRequest.getEmail());
+
+        String jwtToken = jwtUtil.generateToken(userDetails,investor.get());
 
         return ResponseEntity.ok(Map.of("status", "success", "token", jwtToken, "email", otpRequest.getEmail()));
     }

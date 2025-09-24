@@ -20,6 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class InvestorRegistrationController {
 
+
     private final InvestorRegistrationService registrationService;
 
     @PostMapping("/register")

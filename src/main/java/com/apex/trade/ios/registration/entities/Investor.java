@@ -5,17 +5,18 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "investors")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Investor {
+public class Investor  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +44,7 @@ public class Investor {
 
     private String emailVerificationToken;
 
-
+    private String panNumber;
 
 
     @PrePersist
