@@ -58,6 +58,7 @@ public class Investor {
 
 
 
+    private String panNumber;
 
 
     @PrePersist

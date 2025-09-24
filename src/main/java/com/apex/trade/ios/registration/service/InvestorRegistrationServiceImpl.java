@@ -43,7 +43,7 @@ public class InvestorRegistrationServiceImpl implements InvestorRegistrationServ
         investor.setNominee(investor.getNominee());
         investor.setType(investor.getType());
         investor.setRole(investor.getRole());
-        Role role = roleRepository.findByName("ROLE_INVESTOR").orElseThrow(() -> new RuntimeException("Default role not found"));
+        Role role = roleRepository.findByName("NEW_INVESTOR").orElseThrow(() -> new RuntimeException("Default role not found"));
 
         investor.setRoles(Set.of(role));
 

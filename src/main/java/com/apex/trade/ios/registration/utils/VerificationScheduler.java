@@ -20,7 +20,7 @@ public class VerificationScheduler {
     private final NotificationService notificationService;
     private final SecureRandom secureRandom = new SecureRandom();
 
-    @Scheduled(fixedDelay = 60000) // every 60s
+//    @Scheduled(fixedDelay = 60000) // every 60s
     public void processPendingKycs() {
         List<Investor> pending = investorRepository.findAllByKycStatus(KycStatus.PENDING);
         log.info("Processing {} pending KYC(s)", pending.size());
