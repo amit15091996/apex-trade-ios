@@ -22,7 +22,7 @@ import java.util.Optional;
 public class EmailVerificationController {
 
     @Autowired
-    private InvestorRegistrationRepository investorRepository;
+    public InvestorRegistrationRepository investorRepository;
 
     @GetMapping("/verify-email")
     public ResponseEntity<?> verifyEmail(@RequestParam("token") String token) {
