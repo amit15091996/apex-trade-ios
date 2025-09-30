@@ -24,4 +24,8 @@ public class InvestorRegistrationRequest {
     @Pattern(regexp = "[A-Z]{5}[0-9]{4}[A-Z]{1}", message = "Invalid PAN number format")
     private String panNumber;
 
+    @NotBlank
+    private String aadhaar;
+
+
 }

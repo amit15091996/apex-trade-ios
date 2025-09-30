@@ -35,7 +35,7 @@ public class AadharKYCController {
                 .retrieve()
                 .toEntity(String.class);
 //        {
-//            "status": "SUCCESS",
+//                "status": "SUCCESS",
 //                "message": "OTP sent successfully",
 //                "txnId": "TXN123456"
 //        }
