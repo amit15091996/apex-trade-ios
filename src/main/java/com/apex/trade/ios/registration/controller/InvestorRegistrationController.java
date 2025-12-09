@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/investors")
+@RequestMapping("/api/individual/investors")
 @RequiredArgsConstructor
 public class InvestorRegistrationController {
 

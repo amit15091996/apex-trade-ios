@@ -24,7 +24,6 @@ public class PasswordResetController {
         if (email == null || email.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("message", "Email is required"));
         }
-
         try {
             passwordResetService.createPasswordResetToken(email);
             return ResponseEntity.ok(Map.of("message", "Password reset email sent"));
