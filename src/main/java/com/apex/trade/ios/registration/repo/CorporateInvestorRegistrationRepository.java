@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface  CorporateInvestorRegistrationRepository extends JpaRepository<CorporateInvestor, Long> {
-    @Query("select c from CorporateInvester c where c.panNumber=:pan")
+    @Query("select c from CorporateInvestor c where c.panNumber=:pan")
     Optional<CorporateInvestor> findbyPan(@Param("pan") String pan);
 }
