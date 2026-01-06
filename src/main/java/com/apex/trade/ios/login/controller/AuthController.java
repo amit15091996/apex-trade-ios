@@ -48,6 +48,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        System.out.println("running");
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
@@ -55,6 +56,7 @@ public class AuthController {
             String otp = String.format("%06d", new SecureRandom().nextInt(999999));
 
             LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(OTP_EXPIRATION_MINUTES);
+            System.out.println("running");
 
 
             userOtpRepository.findByEmail(loginRequest.getEmail()).ifPresent(existingOtp -> userOtpRepository.delete(existingOtp));
@@ -63,13 +65,16 @@ public class AuthController {
             userOtp.setEmail(loginRequest.getEmail());
             userOtp.setOtp(otp);
             userOtp.setExpiryTime(expiryTime);
+            System.out.println("running");
             userOtpRepository.save(userOtp);
+            System.out.println("running");
 
             emailService.sendOtpEmail(loginRequest.getEmail(), otp);
 
             return ResponseEntity.ok(Map.of("status", "otp_sent", "message", "OTP has been sent to your email"));
 
         } catch (BadCredentialsException ex) {
+            System.out.println("running catch");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status", "failed", "message", "Invalid credentials"));
         }
     }

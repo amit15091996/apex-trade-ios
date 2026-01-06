@@ -28,6 +28,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+//    @Override
+//    protected boolean shouldNotFilter(HttpServletRequest request) {
+//        String path = request.getServletPath();
+//
+//        return path.startsWith("/api/auth/login")
+//                || path.startsWith("/api/individual/investors/")
+//                || path.startsWith("/api/corporate/investors/")
+//                || path.startsWith("/api/investors/verify-email")
+//                || path.startsWith("/api/aadhaar/verify-otp");
+//    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -51,6 +62,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if (jwtUtil.validateToken(token)) {
