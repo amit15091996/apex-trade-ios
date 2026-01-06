@@ -14,7 +14,7 @@ import java.util.Date;
 @Slf4j
 public class JwtUtil {
     private final String jwtSecret = "uW8vJt6mRzQf4B1KxP9YdM2HsVcXtZeFqLnOwEjRgUkTiYpX";
-    private final int jwtExpirationMs = 86400000;
+    private final int jwtExpirationMs = 3600000;
 
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()

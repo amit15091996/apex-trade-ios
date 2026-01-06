@@ -16,4 +16,5 @@ public class CorporateRegistrationRequest {
 
     @NotBlank
     @Email
-    private String email;}
+    private String email;
+}

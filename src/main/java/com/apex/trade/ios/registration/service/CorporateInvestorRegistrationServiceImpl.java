@@ -2,26 +2,20 @@ package com.apex.trade.ios.registration.service;
 
 import com.apex.trade.ios.email.EmailService;
 import com.apex.trade.ios.registration.beans.CorporateRegistrationRequest;
-import com.apex.trade.ios.registration.beans.InvestorRegistrationRequest;
 import com.apex.trade.ios.registration.entities.CorporateInvestor;
-import com.apex.trade.ios.registration.entities.Investor;
-import com.apex.trade.ios.registration.entities.Role;
 import com.apex.trade.ios.registration.repo.CorporateInvestorRegistrationRepository;
-import com.apex.trade.ios.registration.repo.InvestorRegistrationRepository;
-import com.apex.trade.ios.registration.repo.RoleRepository;
 import com.apex.trade.ios.registration.utils.KycStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class CorporateInvesterRegistrationServiceImpl implements CorporateInvesterRegistrationService{
+public class CorporateInvestorRegistrationServiceImpl implements CorporateInvestorRegistrationService {
 
-    private CorporateInvestorRegistrationRepository corporateInvestorRegistrationRepository;
+    private final CorporateInvestorRegistrationRepository corporateInvestorRegistrationRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
 

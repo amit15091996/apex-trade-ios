@@ -2,9 +2,7 @@ package com.apex.trade.ios.registration.controller;
 
 import com.apex.trade.ios.registration.beans.CorporateRegistrationRequest;
 import com.apex.trade.ios.registration.entities.CorporateInvestor;
-import com.apex.trade.ios.registration.entities.Investor;
-import com.apex.trade.ios.registration.service.CorporateInvesterRegistrationService;
-import com.apex.trade.ios.registration.service.InvestorRegistrationService;
+import com.apex.trade.ios.registration.service.CorporateInvestorRegistrationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,17 +16,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/corporate/investers")
+@RequestMapping("/api/corporate/investors")
 @RequiredArgsConstructor
 public class CorporateRegistrationController {
-    private final CorporateInvesterRegistrationService corporateInvesterRegistrationService;
+    private final CorporateInvestorRegistrationService corporateInvestorRegistrationService;
 
     @PostMapping("/register")
     public ResponseEntity<Map<String,Object>> register(@Valid @RequestBody CorporateRegistrationRequest corporateRegistrationRequest) {
        Map<String,Object> map=new HashMap<>();
         try {
-            CorporateInvestor investor = corporateInvesterRegistrationService.registerCorporateInvestor(corporateRegistrationRequest);
-
+            CorporateInvestor investor = corporateInvestorRegistrationService.registerCorporateInvestor(corporateRegistrationRequest);
             map.put("status", "success");
             map.put("created", "true");
             map.put("id", investor.getId());
