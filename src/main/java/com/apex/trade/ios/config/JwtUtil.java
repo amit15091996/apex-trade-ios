@@ -5,10 +5,12 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -18,8 +20,8 @@ public class JwtUtil {
 
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
-                //set the json object instead of using only user name
                 .setSubject(userDetails.getUsername())
+                .claim("roles", userDetails.getAuthorities().stream() .map(GrantedAuthority::getAuthority) .collect(Collectors.toList()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
                 .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()), SignatureAlgorithm.HS256)
