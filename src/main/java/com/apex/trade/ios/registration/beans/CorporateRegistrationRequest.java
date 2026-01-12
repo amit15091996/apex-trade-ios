@@ -1,0 +1,20 @@
+package com.apex.trade.ios.registration.beans;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import lombok.Data;
+
+@Data
+public class CorporateRegistrationRequest {
+    @NotBlank
+    @Pattern(regexp = "[A-Z]{5}[0-9]{4}[A-Z]{1}", message = "Invalid PAN number format")
+    private String panNumber;
+
+    @NotBlank
+    private String password;
+
+    @NotBlank
+    @Email
+    private String email;
+}

@@ -35,12 +35,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/investors/register",
+                                "/api/individual/investors/register",
+                                "/api/corporate/investors/register",
                                 "/api/auth/login",
                                 "/api/investors/verify-email",
-                                "/api/auth/verify-otp"
+                                "/api/auth/verify-otp",
+                                "/api/aadhaar/verify-otp"
                         ).permitAll()
-                        // .requestMatchers("/api/kyc/upload").hasRole("ROLE_INVESTOR")
                         .anyRequest().authenticated()
                 )
 

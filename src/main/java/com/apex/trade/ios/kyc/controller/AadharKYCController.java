@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/aadhaar")
+@RequestMapping("/api/aadhaar")
 public class AadharKYCController {
 
     private final WebClient webClient;
